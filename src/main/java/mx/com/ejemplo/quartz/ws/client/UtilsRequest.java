@@ -23,83 +23,13 @@ public class UtilsRequest {
 	private static final String MSG_ACCEPT = "Accept";
 	private static final String MSG_ENCODING = "application/json;charset=utf-8";
 	private static final String UTF8_MSG = "UTF-8";
-	
+	private static final String API_ACCESS_KEY = "AIzaSyDPRL1DBVC_yARthGyWiiFGgtUbKT5EqiE";
 	/**
 	 * Public constructor
 	 */
 	private UtilsRequest() {
 		super();
 
-	}
-
-	/**
-	 * Convierte un objeto en String.
-	 *
-	 * @param obj
-	 * @return
-	 */
-	public static String objectToString(Object obj) {
-		if (obj != null) {
-			return obj.toString();
-		} else {
-			return "";
-		}
-
-	}
-
-	/**
-	 * Parse una fecha a un formato determinado
-	 *
-	 * @param dateIn la fecha que sera parseada
-	 * @param format  formato en que viene la fecha
-	 *
-	 * @return El string con la fecha que fue formateada
-	 */
-	public static String parseDate(String dateIn, String format) {
-		SimpleDateFormat formatter = new SimpleDateFormat(format);
-		String strDate = "";
-		try {
-			Date date = formatter.parse(dateIn);
-			Format f1 = new SimpleDateFormat("yyyy-MM-dd");
-			strDate = f1.format(date);
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return strDate;
-	}
-	/**
-	 * 
-	 * @param dateIn
-	 * @param format
-	 * @return
-	 */
-	public static String parseDateDMY(String dateIn, String format) {
-		SimpleDateFormat formatter = new SimpleDateFormat(format);
-		String strDate = "";
-		try {
-			Date date = formatter.parse(dateIn);
-			Format formatter1 = new SimpleDateFormat("dd/MM/yyyy");
-			strDate = formatter1.format(date);
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return strDate;
-	}
-	/**
-	 * 
-	 * @param input
-	 * @return
-	 */
-	public static boolean isInteger(String input) {
-		try {
-			Integer i = Integer.parseInt(input);			
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
 	}
 
 	/**
@@ -115,7 +45,8 @@ public class UtilsRequest {
 
 		ResponseEntity response;
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);;
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		headers.set("Authorization", API_ACCESS_KEY);
 
 		switch (metodo) {
 		case 1:// GET
@@ -217,6 +148,77 @@ public class UtilsRequest {
 		headers.add(MSG_ACCEPT, MSG_ENCODING);
 		HttpEntity entity = new HttpEntity<>(param, headers);
 		return restTemplate.exchange(url, HttpMethod.DELETE, entity, Object.class);
+	}
+	
+	/**
+	 * Convierte un objeto en String.
+	 *
+	 * @param obj
+	 * @return
+	 */
+	public static String objectToString(Object obj) {
+		if (obj != null) {
+			return obj.toString();
+		} else {
+			return "";
+		}
+
+	}
+
+	/**
+	 * Parse una fecha a un formato determinado
+	 *
+	 * @param dateIn la fecha que sera parseada
+	 * @param format  formato en que viene la fecha
+	 *
+	 * @return El string con la fecha que fue formateada
+	 */
+	public static String parseDate(String dateIn, String format) {
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+		String strDate = "";
+		try {
+			Date date = formatter.parse(dateIn);
+			Format f1 = new SimpleDateFormat("yyyy-MM-dd");
+			strDate = f1.format(date);
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return strDate;
+	}
+	/**
+	 * 
+	 * @param dateIn
+	 * @param format
+	 * @return
+	 */
+	public static String parseDateDMY(String dateIn, String format) {
+		SimpleDateFormat formatter = new SimpleDateFormat(format);
+		String strDate = "";
+		try {
+			Date date = formatter.parse(dateIn);
+			Format formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+			strDate = formatter1.format(date);
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return strDate;
+	}
+	/**
+	 * 
+	 * @param input
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public static boolean isInteger(String input) {
+		try {
+			Integer i = Integer.parseInt(input);			
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	/**

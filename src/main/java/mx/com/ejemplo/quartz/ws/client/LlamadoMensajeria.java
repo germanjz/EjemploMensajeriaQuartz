@@ -19,9 +19,10 @@ public class LlamadoMensajeria {
 							+ "\"sound\":   \""  	+  "1" + "\","
 						    + "}";
 		
-		ResponseEntity<?> response = UtilsRequest.doRequest(jsonParam, url, 2);
-		Map rp = (Map) response.getBody();
+//		ResponseEntity<?> response = UtilsRequest.doRequest(jsonParam, url, 2);
+//		Map rp = (Map) response.getBody();
 		
+		System.out.println("Llamada al Metodo llamadoServicioWeb()");
 		return "Llamada al Metodo llamadoServicioWeb()";
 	}
 }

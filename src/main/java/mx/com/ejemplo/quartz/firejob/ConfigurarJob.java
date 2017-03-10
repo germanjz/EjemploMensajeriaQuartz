@@ -16,7 +16,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import mx.com.ejemplo.quartz.firejob.latch.ILatch;
 import mx.com.ejemplo.quartz.job.MyJob;
 
-public class LanzarJob implements ILatch {
+public class ConfigurarJob implements ILatch {
 	private int conteo = 3;
 	private CountDownLatch latch = new CountDownLatch(conteo + 1);
 
